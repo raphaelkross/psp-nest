@@ -8,8 +8,12 @@ export class CustomersController {
 
     @Get('balance')
     async balance() : Promise<Balance> {
-        // throw new HttpException('Forbidden', HttpStatus.FORB
+        const available = await this.payablesService.getBalance('paid');
+        const waiting = await this.payablesService.getBalance('waiting_funds');
 
-        return this.payablesService.getBalance();
+        return {
+            available: parseInt(available.sum),
+            waiting_funds: parseInt(waiting.sum),
+        };
     }
 }

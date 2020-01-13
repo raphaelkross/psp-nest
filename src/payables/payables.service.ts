@@ -17,6 +17,14 @@ export class PayablesService {
         return this.payableRepository.save(payable);
     }
 
+    getBalance(status: string): Promise<any> {
+        return this.payableRepository
+            .createQueryBuilder("payables")
+            .select("SUM(payables.amount)", "sum")
+            .where("payables.status = :status", { status: status })
+            .getRawOne();
+    }
+
     processTransaction(transaction: Transaction): Payable {
         const date_obj = new Date();
         let status: string = '';
@@ -43,14 +51,5 @@ export class PayablesService {
             status: status,
             payment_date: date,
         };
-    }
-
-    getBalance(): Balance {
-        const balance: Balance = {
-            available: 6000,
-            waiting_funds: 40000,
-        };
-
-        return balance;
     }
 }
