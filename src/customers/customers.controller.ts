@@ -1,6 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, ServiceUnavailableException } from '@nestjs/common';
 import { PayablesService } from '../payables/payables.service';
 import { Balance } from '../payables/interfaces/balance.interface';
+import { BalanceResponse } from '../payables/interfaces/balance-response.interface';
 
 @Controller('customers')
 export class CustomersController {
@@ -8,8 +9,16 @@ export class CustomersController {
 
     @Get('balance')
     async balance() : Promise<Balance> {
-        const available = await this.payablesService.getBalance('paid');
-        const waiting = await this.payablesService.getBalance('waiting_funds');
+        let available: BalanceResponse;
+        let waiting: BalanceResponse;
+
+        try {
+            available = await this.payablesService.getBalance('paid');
+            waiting = await this.payablesService.getBalance('waiting_funds');
+        }  catch ( error ) {
+            console.error(error);
+            throw new ServiceUnavailableException('Service unavailable. Try again later.')
+        }
 
         return {
             available: parseInt(available.sum),

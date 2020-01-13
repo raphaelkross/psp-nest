@@ -2,8 +2,6 @@ import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
 
-import { CreateTransaction } from './dto/transactions.dto';
-
 @Injectable()
 export class ValidationPipe implements PipeTransform {
     async transform(value: any, { metatype }: ArgumentMetadata) {

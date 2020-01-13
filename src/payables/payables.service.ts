@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Transaction } from '../transactions/interfaces/transaction.interface';
 import { Payable } from './interfaces/payable.interface';
-import { Balance } from './interfaces/balance.interface';
+import { BalanceResponse } from './interfaces/balance-response.interface';
 import { Repository } from 'typeorm';
 import { Payables } from './payables.entity';
 
@@ -17,7 +17,7 @@ export class PayablesService {
         return this.payableRepository.save(payable);
     }
 
-    getBalance(status: string): Promise<any> {
+    getBalance(status: string): Promise<BalanceResponse> {
         return this.payableRepository
             .createQueryBuilder("payables")
             .select("SUM(payables.amount)", "sum")
