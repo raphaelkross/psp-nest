@@ -6,11 +6,12 @@ import { CustomersController } from './customers/customers.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Transactions } from './transactions/transactions.entity';
 import { Payables } from './payables/payables.entity';
-import { ConfigModule } from '@nestjs/config';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.POSTGRES_URL,
