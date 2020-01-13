@@ -27,7 +27,6 @@ export class TransactionsController {
         try {
             transaction = await this.transactionsService.create(createTransaction);
         }  catch ( error ) {
-            console.error(error);
             throw new ServiceUnavailableException('Service unavailable. Try again later.')
         }
 
@@ -38,7 +37,6 @@ export class TransactionsController {
         try {
             this.payablesService.create(processedPayabled);
         }  catch ( error ) {
-            console.error(error);
             throw new ServiceUnavailableException('Service unavailable. Try again later.')
         }
 
@@ -49,6 +47,14 @@ export class TransactionsController {
 
     @Get()
     async findAll() : Promise<Transaction[]> {
-        return this.transactionsService.findAll();
+        let transactions: Transaction[];
+
+        try {
+            transactions = await this.transactionsService.findAll();
+        }  catch ( error ) {
+            throw new ServiceUnavailableException('Service unavailable. Try again later.')
+        }
+
+        return transactions;
     }
 }
