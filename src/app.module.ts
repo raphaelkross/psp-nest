@@ -6,14 +6,16 @@ import { CustomersController } from './customers/customers.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Transactions } from './transactions/transactions.entity';
 import { Payables } from './payables/payables.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: 'postgres://jlpfezcu:vf6F0Ns8mSJ0i96jAIwKuv0uVq7xb2YJ@rajje.db.elephantsql.com:5432/jlpfezcu',
-      username: 'jlpfezcu',
-      password: 'vf6F0Ns8mSJ0i96jAIwKuv0uVq7xb2YJ',
+      url: process.env.POSTGRES_URL,
+      username: process.env.POSTGRES_USERNAME,
+      password: process.env.POSTGRES_PASSWORD,
       entities: [ Transactions, Payables ],
       synchronize: true,
     }),
