@@ -16,7 +16,6 @@ export class CustomersController {
             available = await this.payablesService.getBalance('paid');
             waiting = await this.payablesService.getBalance('waiting_funds');
         }  catch ( error ) {
-            console.error(error);
             throw new ServiceUnavailableException('Service unavailable. Try again later.')
         }
 
