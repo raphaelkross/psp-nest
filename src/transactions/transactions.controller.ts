@@ -15,35 +15,27 @@ export class TransactionsController {
 
     @Post()
     @UsePipes(new ValidationPipe())
-    async create(@Body() createTransaction: CreateTransaction,) {
+    async create(@Body() createTransaction: CreateTransaction) {
         
-        // Process the payment.
+        // Process the payment with gateway.
 
         // Remove the last 4 digits of credit card.
         createTransaction.card_number = createTransaction.card_number.substr(createTransaction.card_number.length - 4);
 
         // Save the Transaction at Database.
-        const transaction = await this.transactionsService.create(createTransaction);
+        const transaction: Transaction = await this.transactionsService.create(createTransaction);
 
-        console.log( transaction );
+        const processedPayabled = this.payablesService.processTransaction(transaction);
 
-        const payable: Payable = {
-            amount: 5000,
-            status: 'paid',
-            payment_date: new Date(),
-        };
-
-        this.payablesService.create(payable);
+        this.payablesService.create(processedPayabled);
 
         return {
-            message: `Transaction ${transaction.id} processed with success.`,
+            message: `Transaction #${transaction.id} processed with success.`,
         };
     }
 
     @Get()
     async findAll() : Promise<Transaction[]> {
-        // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
-
         return this.transactionsService.findAll();
     }
 }

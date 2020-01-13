@@ -1,5 +1,5 @@
 export interface Payable {
     amount: number;
-    status: 'paid' | 'waiting_funds';
-    payment_date: Date;
+    status: string;
+    payment_date: string;
 }

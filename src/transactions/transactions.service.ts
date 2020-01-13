@@ -2,12 +2,10 @@ import { Injectable, } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Transaction as ITransaction } from './interfaces/transaction.interface';
 import { Repository } from 'typeorm';
-import { Transactions } from './transaction.entity';
+import { Transactions } from './transactions.entity';
 
 @Injectable()
 export class TransactionsService {
-    private readonly transactions: ITransaction[] = [];
-
     constructor(
         @InjectRepository(Transactions)
         private readonly transactionRepository: Repository<Transactions>,
