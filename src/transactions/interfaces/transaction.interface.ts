@@ -1,7 +1,6 @@
-import { PaymentMethod } from '../interfaces/payment-method.interface';
+import { PaymentMethod } from './payment-method.interface';
 
-
-export class CreateTransaction {
+export interface Transaction {
     readonly amount: number;
     readonly description: string;
     readonly method: PaymentMethod;
