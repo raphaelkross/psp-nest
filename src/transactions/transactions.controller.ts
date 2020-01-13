@@ -27,7 +27,7 @@ export class TransactionsController {
         this.payablesService.create(payable);
 
         return {
-            message: 'Transaction added with success.',
+            message: 'Transaction processed with success.',
         };
     }
 

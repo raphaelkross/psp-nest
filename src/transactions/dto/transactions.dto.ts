@@ -1,5 +1,4 @@
 import { IsString, IsInt, IsDefined, IsNumberString, MaxLength, MinLength } from 'class-validator';
-import { PaymentMethod } from '../interfaces/payment-method.interface';
 
 export class CreateTransaction {
     @IsDefined()
@@ -12,7 +11,7 @@ export class CreateTransaction {
 
     @IsDefined()
     @IsString()
-    readonly method: PaymentMethod;
+    readonly method: string;
 
     @IsDefined()
     @IsString()
