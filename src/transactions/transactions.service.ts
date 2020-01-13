@@ -1,4 +1,4 @@
-import { Injectable, } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Transaction as ITransaction } from './interfaces/transaction.interface';
 import { Repository } from 'typeorm';

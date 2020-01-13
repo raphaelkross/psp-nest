@@ -7,30 +7,30 @@ import { Transaction } from '../transactions/interfaces/transaction.interface';
 import { Payable } from './interfaces/payable.interface';
 
 const mockDate = (expected: Date) => {
-  const _Date = Date
+  const _Date = Date;
 
   // If any Date or number is passed to the constructor
   // use that instead of our mocked date
   function MockDate(mockOverride?: Date | number) {
-    return new _Date(mockOverride || expected)
+    return new _Date(mockOverride || expected);
   }
 
-  MockDate.UTC = _Date.UTC
-  MockDate.parse = _Date.parse
-  MockDate.now = () => expected.getTime()
+  MockDate.UTC = _Date.UTC;
+  MockDate.parse = _Date.parse;
+  MockDate.now = () => expected.getTime();
   // Give our mock Date has the same prototype as Date
   // Some libraries rely on this to identify Date objects
-  MockDate.prototype = _Date.prototype
+  MockDate.prototype = _Date.prototype;
 
   // Our mock is not a full implementation of Date
   // Types will not match but it's good enough for our tests
-  global.Date = MockDate as any
+  global.Date = MockDate as any;
 
   // Callback function to remove the Date mock
   return () => {
-    global.Date = _Date
-  }
-}
+    global.Date = _Date;
+  };
+};
 
 describe('Payables Service', () => {
   let service: PayablesService;
@@ -41,7 +41,7 @@ describe('Payables Service', () => {
         PayablesService,
         {
           provide: getRepositoryToken(Payables),
-          useClass: mockRepository 
+          useClass: mockRepository,
         },
       ],
     }).compile();

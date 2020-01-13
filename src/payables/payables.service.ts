@@ -19,9 +19,9 @@ export class PayablesService {
 
     getBalance(status: string): Promise<BalanceResponse> {
         return this.payableRepository
-            .createQueryBuilder("payables")
-            .select("SUM(payables.amount)", "sum")
-            .where("payables.status = :status", { status: status })
+            .createQueryBuilder('payables')
+            .select('SUM(payables.amount)', 'sum')
+            .where('payables.status = :status', { status })
             .getRawOne();
     }
 
@@ -40,15 +40,15 @@ export class PayablesService {
         } else if ( transaction.method == 'credit_card' ) {
             status = 'waiting_funds';
             // D+30.
-            date_obj.setDate(date_obj.getDate() + 30)
+            date_obj.setDate(date_obj.getDate() + 30);
             date = date_obj.toString();
             // Discount 5% fee.
             amount = transaction.amount - ( ( transaction.amount / 100 ) * 5 );
         }
-        
+
         return {
-            amount: amount,
-            status: status,
+            amount,
+            status,
             payment_date: date,
         };
     }

@@ -17,7 +17,7 @@ describe('Customers Controller', () => {
         PayablesService,
         {
           provide: getRepositoryToken(Payables),
-          useClass: mockRepository 
+          useClass: mockRepository,
         },
       ],
     }).compile();
@@ -34,17 +34,17 @@ describe('Customers Controller', () => {
         waiting_funds: 5000,
       };
 
-      jest.spyOn(service, 'getBalance').mockImplementation( () => new Promise( (resolve) => { resolve( { sum: '5000' } ) }) );
+      jest.spyOn(service, 'getBalance').mockImplementation( () => new Promise( (resolve) => { resolve( { sum: '5000' } ); }) );
 
       expect( await controller.balance() ).toStrictEqual(result);
     });
-  
+
     it('should throw exception if query to DB fails', async () => {
-      jest.spyOn(service, 'getBalance').mockImplementation( () => new Promise( (resolve, reject) => { reject( new Error('Error') ) }) );
+      jest.spyOn(service, 'getBalance').mockImplementation( () => new Promise( (resolve, reject) => { reject( new Error('Error') ); }) );
 
       try {
         await controller.balance();
-      } catch( e ) {
+      } catch ( e ) {
         expect(e).toBeInstanceOf(ServiceUnavailableException);
       }
     });

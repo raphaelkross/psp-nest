@@ -12,5 +12,5 @@ export class Payables {
   status: string;
 
   @Column('timestamp')
-  payment_date: string
+  payment_date: string;
 }

@@ -22,11 +22,11 @@ describe('Transactions Controller', () => {
         PayablesService,
         {
           provide: getRepositoryToken(Transactions),
-          useClass: mockRepository 
+          useClass: mockRepository,
         },
         {
           provide: getRepositoryToken(Payables),
-          useClass: mockRepository 
+          useClass: mockRepository,
         },
       ],
     }).compile();
@@ -52,17 +52,17 @@ describe('Transactions Controller', () => {
         },
       ];
 
-      jest.spyOn(service, 'findAll').mockImplementation( () => new Promise( (resolve) => { resolve( result ) }) );
+      jest.spyOn(service, 'findAll').mockImplementation( () => new Promise( (resolve) => { resolve( result ); }) );
 
       expect( await controller.findAll() ).toBe(result);
     });
 
     it('should throw exception if query to DB fails', async () => {
-      jest.spyOn(service, 'findAll').mockImplementation( () => new Promise( (resolve, reject) => { reject( new Error('Error') ) }) );
+      jest.spyOn(service, 'findAll').mockImplementation( () => new Promise( (resolve, reject) => { reject( new Error('Error') ); }) );
 
       try {
         await controller.findAll();
-      } catch( e ) {
+      } catch ( e ) {
         expect(e).toBeInstanceOf(ServiceUnavailableException);
       }
     });
@@ -93,8 +93,8 @@ describe('Transactions Controller', () => {
         card_cvv: '123',
       };
 
-      jest.spyOn(service, 'create').mockImplementation( () => new Promise( (resolve) => { resolve( result ) }) );
-      jest.spyOn(servicePayables, 'create').mockImplementation( () => new Promise( (resolve) => { resolve() }) );
+      jest.spyOn(service, 'create').mockImplementation( () => new Promise( (resolve) => { resolve( result ); }) );
+      jest.spyOn(servicePayables, 'create').mockImplementation( () => new Promise( (resolve) => { resolve(); }) );
 
       expect( await controller.create(transactionInput) ).toStrictEqual({ message: 'Transaction #10 processed with success.' });
     });
@@ -110,11 +110,11 @@ describe('Transactions Controller', () => {
         card_cvv: '123',
       };
 
-      jest.spyOn(service, 'create').mockImplementation( () => new Promise( (resolve, reject) => { reject( new Error('Error') ) }) );
+      jest.spyOn(service, 'create').mockImplementation( () => new Promise( (resolve, reject) => { reject( new Error('Error') ); }) );
 
       try {
         await controller.create(transactionInput);
-      } catch( e ) {
+      } catch ( e ) {
         expect(e).toBeInstanceOf(ServiceUnavailableException);
       }
     });
@@ -130,11 +130,11 @@ describe('Transactions Controller', () => {
         card_cvv: '123',
       };
 
-      jest.spyOn(servicePayables, 'create').mockImplementation( () => new Promise( (resolve, reject) => { reject( new Error('Error') ) }) );
+      jest.spyOn(servicePayables, 'create').mockImplementation( () => new Promise( (resolve, reject) => { reject( new Error('Error') ); }) );
 
       try {
         await controller.create(transactionInput);
-      } catch( e ) {
+      } catch ( e ) {
         expect(e).toBeInstanceOf(ServiceUnavailableException);
       }
     });

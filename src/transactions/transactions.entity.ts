@@ -12,17 +12,17 @@ export class Transactions {
   description: string;
 
   @Column('text')
-  card_number: string
-  
-  @Column('text')
-  method: string
+  card_number: string;
 
   @Column('text')
-  card_holder: string
-  
+  method: string;
+
   @Column('text')
-  card_expiration: string
-  
+  card_holder: string;
+
   @Column('text')
-  card_cvv: string
+  card_expiration: string;
+
+  @Column('text')
+  card_cvv: string;
 }

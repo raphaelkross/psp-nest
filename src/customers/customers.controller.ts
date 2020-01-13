@@ -8,7 +8,7 @@ export class CustomersController {
     constructor(private readonly payablesService: PayablesService) {}
 
     @Get('balance')
-    async balance() : Promise<Balance> {
+    async balance(): Promise<Balance> {
         let available: BalanceResponse;
         let waiting: BalanceResponse;
 
@@ -16,7 +16,7 @@ export class CustomersController {
             available = await this.payablesService.getBalance('paid');
             waiting = await this.payablesService.getBalance('waiting_funds');
         }  catch ( error ) {
-            throw new ServiceUnavailableException('Service unavailable. Try again later.')
+            throw new ServiceUnavailableException('Service unavailable. Try again later.');
         }
 
         return {
