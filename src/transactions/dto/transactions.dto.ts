@@ -3,36 +3,36 @@ import { IsString, IsInt, IsDefined, IsNumberString, MaxLength, MinLength } from
 export class CreateTransaction {
     @IsDefined()
     @IsNumberString()
-    readonly amount: number;
+    amount: number;
 
     @IsDefined()
     @IsString()
-    readonly description: string;
+    description: string;
 
     @IsDefined()
     @IsString()
-    readonly method: string;
+    method: string;
 
     @IsDefined()
     @IsString()
     @IsNumberString()
     @MaxLength(16)
     @MinLength(16)
-    readonly card_number: string;
+    card_number: string;
 
     @IsDefined()
     @IsString()
-    readonly card_holder: string;
+    card_holder: string;
 
     @IsDefined()
     @IsString()
     @MaxLength(7)
     @MinLength(7)
-    readonly card_expiration: string;
+    card_expiration: string;
 
     @IsDefined()
     @IsString()
     @MaxLength(3)
     @MinLength(3)
-    readonly card_cvv: string;
+    card_cvv: string;
 }

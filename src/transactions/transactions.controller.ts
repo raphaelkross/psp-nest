@@ -16,7 +16,16 @@ export class TransactionsController {
     @Post()
     @UsePipes(new ValidationPipe())
     async create(@Body() createTransaction: CreateTransaction,) {
-        this.transactionsService.create(createTransaction);
+        
+        // Process the payment.
+
+        // Remove the last 4 digits of credit card.
+        createTransaction.card_number = createTransaction.card_number.substr(createTransaction.card_number.length - 4);
+
+        // Save the Transaction at Database.
+        const transaction = await this.transactionsService.create(createTransaction);
+
+        console.log( transaction );
 
         const payable: Payable = {
             amount: 5000,
@@ -27,7 +36,7 @@ export class TransactionsController {
         this.payablesService.create(payable);
 
         return {
-            message: 'Transaction processed with success.',
+            message: `Transaction ${transaction.id} processed with success.`,
         };
     }
 
