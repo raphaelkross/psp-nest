@@ -1,9 +1,10 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, UsePipes } from '@nestjs/common';
 import { CreateTransaction } from './dto/transactions.dto';
 import { TransactionsService } from './transactions.service';
 import { PayablesService } from '../payables/payables.service';
 import { Transaction } from './interfaces/transaction.interface';
 import { Payable } from '../payables/interfaces/payable.interface';
+import { ValidationPipe } from './validation.pipe';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -13,8 +14,8 @@ export class TransactionsController {
     ) {}
 
     @Post()
+    @UsePipes(new ValidationPipe())
     async create(@Body() createTransaction: CreateTransaction,) {
-        console.log(createTransaction);
         this.transactionsService.create(createTransaction);
 
         const payable: Payable = {
@@ -24,6 +25,10 @@ export class TransactionsController {
         };
 
         this.payablesService.create(payable);
+
+        return {
+            message: 'Transaction added with success.',
+        };
     }
 
     @Get()
