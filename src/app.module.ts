@@ -20,6 +20,9 @@ import { Payables } from './payables/payables.entity';
     TypeOrmModule.forFeature([Transactions, Payables]),
   ],
   controllers: [TransactionsController, CustomersController],
-  providers: [TransactionsService, PayablesService],
+  providers: [
+    TransactionsService,
+    PayablesService,
+  ],
 })
 export class AppModule {}
