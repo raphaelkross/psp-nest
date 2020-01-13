@@ -150,7 +150,4 @@ request(options, function (error, response, body) {
 ```bash
 # unit tests
 $ npm run test
-
-# test coverage
-$ npm run test:cov
 ```
