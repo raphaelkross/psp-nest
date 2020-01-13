@@ -4,6 +4,8 @@ Small example demonstration a PSP system with limited capabilities.
 
 ## Installation
 
+First of all, ensure to be using Node 8 or above.
+
 ```bash
 $ npm install
 ```
