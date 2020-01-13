@@ -31,13 +31,13 @@ export class PayablesService {
         let date: string = '';
         let amount: number = 0;
 
-        if ( transaction.method == 'debit_card' ) {
+        if ( transaction.method === 'debit_card' ) {
             status = 'paid';
             // D+0.
             date = date_obj.toString();
             // Discount 3% fee.
             amount = transaction.amount - ( ( transaction.amount / 100 ) * 3 );
-        } else if ( transaction.method == 'credit_card' ) {
+        } else if ( transaction.method === 'credit_card' ) {
             status = 'waiting_funds';
             // D+30.
             date_obj.setDate(date_obj.getDate() + 30);

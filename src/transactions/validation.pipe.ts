@@ -13,7 +13,7 @@ export class ValidationPipe implements PipeTransform {
             throw new BadRequestException('Validation failed. Check API reference to learn more about this endpoint parameters.');
         }
 
-        if (value.method != 'credit_card' && value.method != 'debit_card') {
+        if (value.method !== 'credit_card' && value.method !== 'debit_card') {
             throw new BadRequestException('Validation failed. Invalid payment method type.');
         }
 

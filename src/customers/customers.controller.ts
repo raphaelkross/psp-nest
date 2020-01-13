@@ -20,8 +20,8 @@ export class CustomersController {
         }
 
         return {
-            available: parseInt(available.sum),
-            waiting_funds: parseInt(waiting.sum),
+            available: parseInt(available.sum, 10),
+            waiting_funds: parseInt(waiting.sum, 10),
         };
     }
 }
