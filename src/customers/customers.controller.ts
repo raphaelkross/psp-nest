@@ -17,11 +17,14 @@ export class CustomersController {
             waiting = await this.payablesService.getBalance('waiting_funds');
         }  catch ( error ) {
             throw new ServiceUnavailableException('Service unavailable. Try again later.');
-        }
+		}
+
+		const availableSum = available.sum !== null ? parseInt(available.sum, 10) : 0;
+		const waitingSum = waiting.sum !== null ? parseInt(waiting.sum, 10) : 0;
 
         return {
-            available: parseInt(available.sum, 10),
-            waiting_funds: parseInt(waiting.sum, 10),
+            available: availableSum,
+            waiting_funds: waitingSum,
         };
     }
 }
