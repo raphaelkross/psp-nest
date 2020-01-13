@@ -4,9 +4,12 @@ Small example demonstration a PSP system with limited capabilities.
 
 ## Installation
 
-First of all, ensure to be using Node 8 or above.
+First of all, ensure to be using **Node version 10**.
 
 ```bash
+# If you don't have nest cli installed yet, install it.
+$ npm i -g @nestjs/cli
+
 $ npm install
 ```
 
